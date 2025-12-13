@@ -111,21 +111,21 @@ def load() -> None:
         try:
             with open(configFilePath, "r", encoding = "UTF-8") as configFile:
                 if configFileType == "yaml":
-                    loadedConfig = yaml.safe_load(configFile) or {} # pyright: ignore[reportUnknownVariableType]
+                    loadedConfig = yaml.safe_load(configFile) or {}
                 else:
-                    loadedConfig = json.load(configFile) or {} # pyright: ignore[reportUnknownVariableType]
+                    loadedConfig = json.load(configFile) or {}
         except:
             logger.exception("Failed to parse the config file")
             sys.exit(1)
         else:
             copyDict(loadedConfig, config)
         if "hideTotalTime" in config["display"]:
-            config["display"]["duration"] = not config["display"]["hideTotalTime"] # pyright: ignore[reportGeneralTypeIssues]
-            del config["display"]["hideTotalTime"] # pyright: ignore[reportGeneralTypeIssues]
+            config["display"]["duration"] = not config["display"]["hideTotalTime"]
+            del config["display"]["hideTotalTime"]
         if "useRemainingTime" in config["display"]:
-            del config["display"]["useRemainingTime"] # pyright: ignore[reportGeneralTypeIssues]
+            del config["display"]["useRemainingTime"]
         if "remainingTime" in config["display"]:
-            del config["display"]["remainingTime"] # pyright: ignore[reportGeneralTypeIssues]
+            del config["display"]["remainingTime"]
         if config["display"]["progressMode"] not in ["off", "elapsed", "remaining", "bar"]:
             config["display"]["progressMode"] = "bar"
     save()

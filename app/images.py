@@ -13,7 +13,7 @@ def upload(key: str, url: str) -> Optional[str]:
     originalImageBytesIO = io.BytesIO(requests.get(url).content)
     originalImage = Image.open(originalImageBytesIO).convert("RGBA")
     newImage = Image.new("RGBA", originalImage.size)
-    newImage.putdata(originalImage.getdata()) # pyright: ignore[reportUnknownArgumentType,reportUnknownMemberType]
+    newImage.putdata(originalImage.getdata())
     if newImage.width != newImage.height and config.config["display"]["posters"]["fit"]:
         longestSideLength = max(newImage.width, newImage.height)
         newImage = ImageOps.pad(newImage, (longestSideLength, longestSideLength), color = (0, 0, 0, 0))

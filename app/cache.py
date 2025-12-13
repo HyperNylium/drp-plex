@@ -23,7 +23,7 @@ def load() -> None:
 
 def get(key: str) -> Optional[str]:
     entry = cache.get(key)
-    if not entry or not isinstance(entry, dict) or "expiry" not in entry or (entry["expiry"] > 0 and time.time() > entry["expiry"]) or "value" not in entry: # pyright: ignore[reportUnnecessaryIsInstance]
+    if not entry or not isinstance(entry, dict) or "expiry" not in entry or (entry["expiry"] > 0 and time.time() > entry["expiry"]) or "value" not in entry:
         return
     return entry["value"]
 
