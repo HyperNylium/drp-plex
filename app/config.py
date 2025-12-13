@@ -36,6 +36,7 @@ class Display(TypedDict):
     statusIcon: bool
     progressMode: str
     statusTextType: StatusTextType
+    pause_timout: int
     paused: bool
     posters: Posters
     buttons: list[Button]
@@ -75,6 +76,7 @@ config: Config = {
             "watching": "title",
             "listening": "artist",
         },
+        "pause_timout": 0,
         "paused": False,
         "posters": {
             "enabled": True,
@@ -128,6 +130,8 @@ def load() -> None:
             del config["display"]["remainingTime"]
         if config["display"]["progressMode"] not in ["off", "elapsed", "remaining", "bar"]:
             config["display"]["progressMode"] = "bar"
+        if "pause_timout" in config["display"] and (not isinstance(config["display"]["pause_timout"], int) or config["display"]["pause_timout"] < 0):
+            config["display"]["pause_timout"] = 0
     save()
 
 class YamlSafeDumper(yaml.SafeDumper):
