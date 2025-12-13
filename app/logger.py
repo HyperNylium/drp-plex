@@ -17,15 +17,15 @@ debug = logger.debug
 
 class LoggerWithPrefix:
 
-	def __init__(self, prefix: str):
-		self.prefix = prefix
-		self.info = self.wrapLoggerFunc(logger.info)
-		self.warning = self.wrapLoggerFunc(logger.warning)
-		self.error = self.wrapLoggerFunc(logger.error)
-		self.exception = self.wrapLoggerFunc(logger.exception)
-		self.debug = self.wrapLoggerFunc(logger.debug)
+    def __init__(self, prefix: str):
+        self.prefix = prefix
+        self.info = self.wrapLoggerFunc(logger.info)
+        self.warning = self.wrapLoggerFunc(logger.warning)
+        self.error = self.wrapLoggerFunc(logger.error)
+        self.exception = self.wrapLoggerFunc(logger.exception)
+        self.debug = self.wrapLoggerFunc(logger.debug)
 
-	def wrapLoggerFunc(self, func: Callable[..., None]) -> Callable[..., None]:
-		def wrappedFunc(obj: Any, *args: Any, **kwargs: Any) -> None:
-			func(self.prefix + str(obj), *args, **kwargs)
-		return wrappedFunc
+    def wrapLoggerFunc(self, func: Callable[..., None]) -> Callable[..., None]:
+        def wrappedFunc(obj: Any, *args: Any, **kwargs: Any) -> None:
+            func(self.prefix + str(obj), *args, **kwargs)
+        return wrappedFunc
