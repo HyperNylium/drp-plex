@@ -202,6 +202,7 @@ class PlexAlertListener(threading.Thread):
         if "whitelistedLibraries" in self.serverConfig and libraryName not in self.serverConfig["whitelistedLibraries"]:
             self.logger.debug("Library '%s' is not whitelisted, ignoring", libraryName)
             return
+        self.logger.debug(f"pauseTimeout: {config.config["display"]["pauseTimeout"]}")
         isPauseTimeoutEnabled = config.config["display"]["pauseTimeout"] > 0 and config.config["display"]["paused"]
         if self.pauseTimedOutSessionKey == sessionKey and self.pauseTimedOutRatingKey == ratingKey:
             if state == "paused" and isPauseTimeoutEnabled:
