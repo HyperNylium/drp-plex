@@ -209,7 +209,7 @@ class PlexAlertListener(threading.Thread):
                 self.logger.debug("Pause timeout already reached for session key %s, ignoring", sessionKey)
                 return
             self.pauseTimedOutSessionKey, self.pauseTimedOutRatingKey = 0, 0
-        if self.pauseTimeoutTimer and (state != "paused" or self.lastSessionKey != sessionKey or self.lastRatingKey != ratingKey):
+        if self.pauseTimeoutTimer and self.lastSessionKey == sessionKey and self.lastRatingKey == ratingKey and state != "paused":
             self.pauseTimeoutTimer.cancel()
             self.pauseTimeoutTimer = None
         isIgnorableState = state == "stopped" or (state == "paused" and not config.config["display"]["paused"])
